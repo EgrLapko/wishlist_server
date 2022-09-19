@@ -7,6 +7,7 @@ const ItemSchema = new mongoose.Schema({
   image: { type: String },
   url: { type: String },
   wisher: { type: String },
+  cameTrue: { type: Boolean },
 });
 
 module.exports = mongoose.model("Item", ItemSchema);

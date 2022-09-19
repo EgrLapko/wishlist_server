@@ -6,6 +6,7 @@ const {
   GraphQLList,
   GraphQLSchema,
   GraphQLNonNull,
+  GraphQLBoolean,
 } = require("graphql");
 
 // ItemType
@@ -19,6 +20,7 @@ const ItemType = new GraphQLObjectType({
     image: { type: GraphQLString },
     url: { type: GraphQLString },
     wisher: { type: GraphQLString },
+    cameTrue: { type: GraphQLBoolean },
   }),
 });
 
@@ -54,6 +56,7 @@ const mutation = new GraphQLObjectType({
         image: { type: GraphQLString },
         url: { type: GraphQLNonNull(GraphQLString) },
         wisher: { type: GraphQLNonNull(GraphQLString) },
+        cameTrue: { type: GraphQLBoolean, defaultValue: false },
       },
       resolve(parent, args) {
         const item = new Item({
@@ -63,6 +66,7 @@ const mutation = new GraphQLObjectType({
           image: args.image,
           url: args.url,
           wisher: args.wisher,
+          cameTrue: false,
         });
 
         // Save to database
@@ -80,6 +84,7 @@ const mutation = new GraphQLObjectType({
         image: { type: GraphQLString },
         url: { type: GraphQLString },
         wisher: { type: GraphQLString },
+        cameTrue: { type: GraphQLBoolean },
       },
       resolve(parent, args) {
         return Item.findByIdAndUpdate(
@@ -92,6 +97,7 @@ const mutation = new GraphQLObjectType({
               image: args.image,
               url: args.url,
               wisher: args.wisher,
+              cameTrue: args.cameTrue,
             },
           },
           { new: true }
